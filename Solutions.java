@@ -69,3 +69,40 @@ long maxSubarraySum(int arr[], int n){
     return maxsofar;
 }
 
+
+ArrayList<Integer> leftView(Node root)
+{
+  // Your code here
+  ArrayList<Integer> list = new ArrayList<>();
+  
+  addInList(root, list, 0);
+  return list;
+}
+
+public void addInList(Node root, ArrayList<Integer> list, int level) {
+    if (root == null) return;
+
+    if (level == list.size()) {
+        list.add(root.data);
+    }
+
+    addInList(root.left, list, level + 1);
+    addInList(root.right, list, level + 1);
+}
+
+
+ArrayList<Integer> rightView(Node node) {
+    //add code here.
+    ArrayList<Integer> list = new ArrayList<>();
+    insertRightNode(node, list, 0);
+    return list;
+}
+
+void insertRightNode(Node node, ArrayList<Integer> list, int level) {
+    if(node == null) return;
+    if(level == list.size()) {
+        list.add(node.data);
+    }
+    insertRightNode(node.right, list, level+1);
+    insertRightNode(node.left, list, level+1);
+}
